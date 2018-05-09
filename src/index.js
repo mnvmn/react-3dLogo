@@ -9,15 +9,21 @@ class Logo extends Component {
   static propTypes = {
     height: PropTypes.number,
     width: PropTypes.number,
+    color: PropTypes.string,
+    isRotating: PropTypes.bool,
+    isReset: PropTypes.bool,
   };
 
   static defaultProps = {
     width: 200,
     height: 200,
+    color: '#0475dc',
+    isRotating: false,
+    isReset: false
   };
 
   componentDidMount() {
-    this.scene = Scene.init(this.props.width, this.props.height);
+    this.scene = Scene.init(this.props);
     this.el.appendChild(this.scene.renderer.domElement);
     // this.setUpDevTools();
     // this.enableInteractivity();

@@ -1,14 +1,15 @@
 import * as THREE from 'three';
 
 const Scene = {
-  init(width, height) {
-    this.setUpScene(width, height);
+  init(params) {
+    this.params = params;
+    this.setUpScene();
     this.setUpGeometry();
-    this.setUpPositions();
+    this.setUpDefaultPositions();
     return this;
   },
   setUpGeometry() {
-    const matWire = new THREE.LineBasicMaterial({ color: '#0475dc', linewidth: 1 });
+    const matWire = new THREE.LineBasicMaterial({ color: this.params.color, linewidth: 1 });
     const circle = new THREE.CircleGeometry(30, 32);
     this.circles = [
       new THREE.LineSegments(new THREE.EdgesGeometry(circle), matWire),
@@ -31,20 +32,20 @@ const Scene = {
       this.scene.add(el);
     });
   },
-  setUpScene(width, height) {
+  setUpScene() {
     this.scene = new THREE.Scene();
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.renderer.setClearColor('#FFF');
-    this.renderer.setSize(width, height);
+    this.renderer.setSize(this.params.width, this.params.height);
 
-    this.camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
+    this.camera = new THREE.PerspectiveCamera(40, this.params.width / this.params.height, 0.1, 1000);
     this.camera.lookAt(new THREE.Vector3(0, 0, 0));
     this.camera.position.x = 0;
     this.camera.position.y = 0;
-    this.camera.position.z = 150;
+    this.camera.position.z = 90;
   },
-  setUpPositions() {
+  setUpDefaultPositions() {
     this.circles[1].rotation.y = Math.PI / 4;
     this.circles[1].rotation.x = Math.PI / 3;
     this.circles[2].rotation.y = Math.PI / 3 * 2; // eslint-disable-line no-mixed-operators
@@ -54,9 +55,19 @@ const Scene = {
     this.neutron.rotation.z = Math.PI / 5;
   },
   animate() {
-    // this.sphere.rotation.y -= 0.002;
+    this.sphere.rotation.y += 0.002;
     // this.neutron.rotation.x += 0.001;
     // this.neutron.rotation.y += 0.005;
+
+    if (this.params.isRotating) {
+      this.circles[0].rotation.x += 0.02;
+      this.circles[1].rotation.x += 0.02;
+      this.circles[1].rotation.y += 0.02;
+      this.circles[2].rotation.y += 0.02;
+    }
+    if(this.params.isReset){
+      this.setUpDefaultPositions();
+    }
   },
   renderFrame() {
     this.animate();
