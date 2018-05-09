@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
-import Logo from '../../src/Logo'
+import Logo from '../../src/index'
 
 class Demo extends Component {
   render() {
