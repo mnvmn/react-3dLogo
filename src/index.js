@@ -3,16 +3,24 @@ import PropTypes from "prop-types";
 import Player from "./player";
 
 class Logo extends Component {
-  render() {
-    const defaultSettings = {
-      width: 200,
-      height: 200,
-      color: "#0475dc",
-      isRotating: false,
-      isReset: false
-    };
+  static propTypes = {
+    height: PropTypes.number,
+    width: PropTypes.number,
+    color: PropTypes.string,
+    isRotating: PropTypes.bool,
+    isDevMode: PropTypes.bool
+  };
 
-    return <Player {...defaultSettings} />;
+  static defaultProps = {
+    width: 200,
+    height: 200,
+    color: "#ddd",
+    isRotating: false,
+    isDevMode: false
+  };
+
+  render() {
+    return <Player {...this.props} />;
   }
 }
 

@@ -1,14 +1,20 @@
-import React, {Component} from 'react'
-import {render} from 'react-dom'
-import Logo from '../../src/index'
+import React, { Component } from "react";
+import { render } from "react-dom";
+import Logo from "../../src/index";
 
 class Demo extends Component {
   render() {
-    return <div>
-      <h1>react-3d-logo Demo</h1>
-      <Logo/>
-    </div>
+    return (
+      <div style={{
+        fontFamily: 'Arial, Helvetica, sans-serif',
+        color: '#54557d'
+      }}>
+        <h3>React Logo in 3D</h3>
+
+        <Logo />
+      </div>
+    );
   }
 }
 
-render(<Demo/>, document.querySelector('#demo'))
+render(<Demo />, document.querySelector("#demo"));

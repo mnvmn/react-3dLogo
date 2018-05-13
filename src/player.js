@@ -17,7 +17,7 @@ export default class Player extends Component {
   static defaultProps = {
     width: 200,
     height: 200,
-    color: "#0475dc",
+    color: "#ddd",
     isRotating: false,
     isDevMode: false
   };
