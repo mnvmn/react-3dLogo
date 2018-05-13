@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import * as THREE from 'three';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import * as THREE from "three";
 // import * as dat from 'dat.gui';
-import * as orbitControls from 'three-orbit-controls';
-import Scene from './Scene';
+import * as orbitControls from "three-orbit-controls";
+import Scene from "./Scene";
 
 export default class Player extends Component {
   static propTypes = {
@@ -11,22 +11,26 @@ export default class Player extends Component {
     width: PropTypes.number,
     color: PropTypes.string,
     isRotating: PropTypes.bool,
-    isReset: PropTypes.bool,
+    isDevMode: PropTypes.bool
   };
 
   static defaultProps = {
     width: 200,
     height: 200,
-    color: '#0475dc',
+    color: "#0475dc",
     isRotating: false,
-    isReset: false
+    isDevMode: false
   };
 
   componentDidMount() {
     this.scene = Scene.init(this.props);
     this.el.appendChild(this.scene.renderer.domElement);
-    // this.setUpDevTools();
-    // this.enableInteractivity();
+
+    if (this.props.isDevMode) {
+      this.setUpDevTools();
+      this.enableInteractivity();
+    }
+
     this.start();
   }
 
@@ -36,16 +40,16 @@ export default class Player extends Component {
   }
 
   setUpDevTools = () => {
-    // const axesHelper = new THREE.AxesHelper(5);
-    // this.scene.add(axesHelper);
+    const axesHelper = new THREE.AxesHelper(5);
+    this.scene.add(axesHelper);
 
     const gui = new dat.GUI();
     const { camera, neutron, circles } = this.scene;
     [camera, neutron, ...circles].forEach((el, index) => {
       const gui2 = gui.addFolder(`element${index}`);
-      gui2.add(el.rotation, 'x', 0, Math.PI, 0.01);
-      gui2.add(el.rotation, 'y', 0, Math.PI, 0.01);
-      gui2.add(el.rotation, 'z', 0, Math.PI, 0.01);
+      gui2.add(el.rotation, "x", 0, Math.PI, 0.01);
+      gui2.add(el.rotation, "y", 0, Math.PI, 0.01);
+      gui2.add(el.rotation, "z", 0, Math.PI, 0.01);
 
       gui2.open();
     });
@@ -77,8 +81,11 @@ export default class Player extends Component {
     return (
       <div
         className="animation"
-        style={{ width: `${this.props.width}px`, height: `${this.props.height}px` }}
-        ref={(el) => {
+        style={{
+          width: `${this.props.width}px`,
+          height: `${this.props.height}px`
+        }}
+        ref={el => {
           this.el = el;
         }}
       />
