@@ -15,6 +15,7 @@ class Logo extends Component {
     colorSatellite: PropTypes.string,
     isRotating: PropTypes.bool,
     isSpinning: PropTypes.bool,
+    visibleSatellites: PropTypes.bool,
     isDevMode: PropTypes.bool
   };
 
@@ -26,6 +27,7 @@ class Logo extends Component {
     colorCore: defaultColor,
     colorOrbit: "#929292",
     colorSatellite: "#5a5a5a",
+    visibleSatellites: true,
     isRotating: false,
     isSpinning: false,
     isDevMode: false
@@ -34,12 +36,16 @@ class Logo extends Component {
   constructor(props) {
     super(props);
     console.log(props.color);
+    this.state = {
+      ...props
+    };
+
     if (props.color) {
       this.state = {
-        ...props,
+        ...this.state,
         colorCore: props.color,
         colorOrbit: props.color,
-        colorSatellite: props.color,
+        colorSatellite: props.color
       };
     }
   }

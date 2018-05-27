@@ -15,7 +15,7 @@ class Demo extends Component {
 
         {/* <Logo />
         <Logo isSpinning/> */}
-        <Logo isRotating isSpinning/>
+        <Logo isRotating isSpinning color="#b3b3b3"/>
       </div>
     );
   }

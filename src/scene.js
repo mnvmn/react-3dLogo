@@ -9,7 +9,9 @@ const Scene = {
     return this;
   },
   setUpGeometry() {
-    var matSatellite = new THREE.MeshBasicMaterial({ color: this.params.colorSatellite });
+    var matSatellite = new THREE.MeshBasicMaterial({
+      color: this.params.colorSatellite
+    });
     const matOrbit = new THREE.LineBasicMaterial({
       color: this.params.colorOrbit,
       linewidth: 1
@@ -26,9 +28,7 @@ const Scene = {
       const satellite = new THREE.SphereGeometry(1, 8, 8);
       const circle = new THREE.CircleGeometry(30, 32);
 
-      this.satellites.push(
-        new THREE.Mesh(satellite, matSatellite)
-      );
+      this.satellites.push(new THREE.Mesh(satellite, matSatellite));
 
       this.circles.push(
         new THREE.LineSegments(new THREE.EdgesGeometry(circle), matOrbit)
@@ -80,9 +80,15 @@ const Scene = {
     this.camera.position.z = 90;
   },
   setUpDefaultPositions() {
-    this.satellites[0].position.set(30, 0, 0);
-    this.satellites[1].position.set(30, 0, 0);
-    this.satellites[2].position.set(30, 0, 0);
+    if(this.params.visibleSatellites){
+      this.satellites[0].position.set(30, 0, 0);
+      this.satellites[1].position.set(30, 0, 0);
+      this.satellites[2].position.set(30, 0, 0);
+    } else {
+      this.satellites.forEach(s => {
+        s.visible = false;
+      });
+    }
 
     this.orbits[0].rotation.x = 16 * Math.PI / 28;
     this.orbits[1].rotation.x = 4 * Math.PI / 11;
