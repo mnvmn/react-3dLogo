@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as THREE from "three";
-// import * as dat from 'dat.gui';
+import * as dat from 'dat.gui';
 import * as orbitControls from "three-orbit-controls";
 import Scene from "./scene";
 
@@ -41,11 +41,11 @@ export default class Player extends Component {
 
   setUpDevTools = () => {
     const axesHelper = new THREE.AxesHelper(5);
-    this.scene.add(axesHelper);
+    this.scene.scene.add(axesHelper);
 
     const gui = new dat.GUI();
-    const { camera, neutron, circles } = this.scene;
-    [camera, neutron, ...circles].forEach((el, index) => {
+    const { camera, neutron, orbits } = this.scene;
+    [camera, neutron, ...orbits].forEach((el, index) => {
       const gui2 = gui.addFolder(`element${index}`);
       gui2.add(el.rotation, "x", 0, Math.PI, 0.01);
       gui2.add(el.rotation, "y", 0, Math.PI, 0.01);
