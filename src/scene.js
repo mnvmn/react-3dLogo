@@ -1,23 +1,24 @@
+import React, { Component } from "react";
 import * as THREE from "three";
 
-const Scene = {
-  init(params) {
-    this.params = params;
+export default class Scene extends Component {
+
+  init() {
     this.setUpScene();
     this.setUpGeometry();
     this.setUpDefaultPositions();
-    return this;
-  },
+  }
+
   setUpGeometry() {
     var matSatellite = new THREE.MeshBasicMaterial({
-      color: this.params.colorSatellite
+      color: this.props.colorSatellite
     });
     const matOrbit = new THREE.LineBasicMaterial({
-      color: this.params.colorOrbit,
+      color: this.props.colorOrbit,
       linewidth: 1
     });
     const matCore = new THREE.LineBasicMaterial({
-      color: this.params.colorCore,
+      color: this.props.colorCore,
       linewidth: 1
     });
 
@@ -60,17 +61,18 @@ const Scene = {
     [this.neutron].forEach(el => {
       this.scene.add(el);
     });
-  },
+  }
+
   setUpScene() {
     this.scene = new THREE.Scene();
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
-    this.renderer.setClearColor(this.params.colorBackground);
-    this.renderer.setSize(this.params.width, this.params.height);
+    this.renderer.setClearColor(this.props.colorBackground);
+    this.renderer.setSize(this.props.width, this.props.height);
 
     this.camera = new THREE.PerspectiveCamera(
       40,
-      this.params.width / this.params.height,
+      this.props.width / this.props.height,
       0.1,
       1000
     );
@@ -78,9 +80,10 @@ const Scene = {
     this.camera.position.x = 0;
     this.camera.position.y = 0;
     this.camera.position.z = 90;
-  },
+  }
+
   setUpDefaultPositions() {
-    if(this.params.visibleSatellites){
+    if(this.props.visibleSatellites){
       this.satellites[0].position.set(30, 0, 0);
       this.satellites[1].position.set(30, 0, 0);
       this.satellites[2].position.set(30, 0, 0);
@@ -101,21 +104,16 @@ const Scene = {
       defaultRotation += 2 * Math.PI / 3;
       o.rotation.z = defaultRotation;
     });
-  },
-  animate() {
-    if (this.params.isSpinning) {
+  }
+
+  animateObjects() {
+    if (this.props.isSpinning) {
       this.neutron.rotation.y += 0.005;
     }
-    if (this.params.isRotating) {
+    if (this.props.isRotating) {
       this.orbits.forEach(o => {
         o.rotation.z += -0.01;
       });
     }
-  },
-  renderFrame() {
-    this.animate();
-    this.renderer.render(this.scene, this.camera);
   }
 };
-
-export default Scene;

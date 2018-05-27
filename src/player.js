@@ -5,7 +5,7 @@ import * as dat from 'dat.gui';
 import * as orbitControls from "three-orbit-controls";
 import Scene from "./scene";
 
-export default class Player extends Component {
+export default class Player extends Scene {
   static propTypes = {
     height: PropTypes.number,
     width: PropTypes.number,
@@ -23,8 +23,9 @@ export default class Player extends Component {
   };
 
   componentDidMount() {
-    this.scene = Scene.init(this.props);
-    this.el.appendChild(this.scene.renderer.domElement);
+    this.init();
+
+    this.el.appendChild(this.renderer.domElement);
 
     if (this.props.isDevMode) {
       this.setUpDevTools();
@@ -36,7 +37,7 @@ export default class Player extends Component {
 
   componentWillUnmount() {
     this.stop();
-    this.el.removeChild(this.scene.renderer.domElement);
+    this.el.removeChild(this.renderer.domElement);
   }
 
   setUpDevTools = () => {
@@ -63,9 +64,14 @@ export default class Player extends Component {
   };
 
   animate = () => {
-    this.scene.renderFrame();
+    this.renderFrame();
     this.frameId = window.requestAnimationFrame(this.animate);
   };
+
+  renderFrame() {
+    this.animateObjects();
+    this.renderer.render(this.scene, this.camera);
+  }
 
   start = () => {
     if (!this.frameId) {

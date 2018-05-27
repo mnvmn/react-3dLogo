@@ -13,8 +13,8 @@ class Demo extends Component {
       >
         <h3>React Logo in 3D</h3>
 
-        {/* <Logo />
-        <Logo isSpinning/> */}
+        <Logo />
+        <Logo isSpinning/>
         <Logo isRotating isSpinning color="#b3b3b3"/>
       </div>
     );
