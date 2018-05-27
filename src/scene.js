@@ -9,8 +9,13 @@ const Scene = {
     return this;
   },
   setUpGeometry() {
-    const matWire = new THREE.LineBasicMaterial({
-      color: this.params.color,
+    var matSatellite = new THREE.MeshBasicMaterial({ color: this.params.colorSatellite });
+    const matOrbit = new THREE.LineBasicMaterial({
+      color: this.params.colorOrbit,
+      linewidth: 1
+    });
+    const matCore = new THREE.LineBasicMaterial({
+      color: this.params.colorCore,
       linewidth: 1
     });
 
@@ -18,15 +23,15 @@ const Scene = {
     this.circles = [];
 
     for (var i = 0; i < 3; i++) {
-      const satellite = new THREE.SphereGeometry(2, 5, 5);
+      const satellite = new THREE.SphereGeometry(1, 8, 8);
       const circle = new THREE.CircleGeometry(30, 32);
 
       this.satellites.push(
-        new THREE.LineSegments(new THREE.EdgesGeometry(satellite), matWire)
+        new THREE.Mesh(satellite, matSatellite)
       );
 
       this.circles.push(
-        new THREE.LineSegments(new THREE.EdgesGeometry(circle), matWire)
+        new THREE.LineSegments(new THREE.EdgesGeometry(circle), matOrbit)
       );
     }
 
@@ -39,7 +44,7 @@ const Scene = {
 
     this.sphere = new THREE.LineSegments(
       new THREE.EdgesGeometry(new THREE.SphereGeometry(5, 9, 9)),
-      matWire
+      matCore
     );
 
     this.orbitsGroup = new THREE.Group();
@@ -90,10 +95,6 @@ const Scene = {
       defaultRotation += 2 * Math.PI / 3;
       o.rotation.z = defaultRotation;
     });
-
-    // this.orbitsGroup.rotation.x = Math.PI / 5 * 2; // eslint-disable-line no-mixed-operators
-    // this.orbitsGroup.rotation.y = Math.PI / 4;
-    // this.orbitsGroup.rotation.z = Math.PI / 5;
   },
   animate() {
     if (this.params.isSpinning) {
@@ -101,7 +102,7 @@ const Scene = {
     }
     if (this.params.isRotating) {
       this.orbits.forEach(o => {
-        o.rotation.z += 0.005;
+        o.rotation.z += -0.01;
       });
     }
   },

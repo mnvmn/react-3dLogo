@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Player from "./player";
 
 const defaultColor = "#404040";
-const defaultColorLight = "#ddd";
 
 class Logo extends Component {
   static propTypes = {
@@ -12,9 +11,8 @@ class Logo extends Component {
     color: PropTypes.string,
     colorBackground: PropTypes.string,
     colorCore: PropTypes.string,
-    colorOrbits: PropTypes.string,
-    colorSatellites: PropTypes.string,
-    color: PropTypes.string,
+    colorOrbit: PropTypes.string,
+    colorSatellite: PropTypes.string,
     isRotating: PropTypes.bool,
     isSpinning: PropTypes.bool,
     isDevMode: PropTypes.bool
@@ -23,18 +21,31 @@ class Logo extends Component {
   static defaultProps = {
     width: 200,
     height: 200,
-    color: defaultColor,
+    color: null,
     colorBackground: "#FFF",
     colorCore: defaultColor,
-    colorOrbits: defaultColor,
-    colorSatellites: defaultColor,
+    colorOrbit: "#929292",
+    colorSatellite: "#5a5a5a",
     isRotating: false,
     isSpinning: false,
-    isDevMode: true,
+    isDevMode: false
   };
 
+  constructor(props) {
+    super(props);
+    console.log(props.color);
+    if (props.color) {
+      this.state = {
+        ...props,
+        colorCore: props.color,
+        colorOrbit: props.color,
+        colorSatellite: props.color,
+      };
+    }
+  }
+
   render() {
-    return <Player {...this.props} />;
+    return <Player {...this.state} />;
   }
 }
 

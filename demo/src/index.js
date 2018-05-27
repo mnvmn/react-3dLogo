@@ -5,13 +5,17 @@ import Logo from "../../src/index";
 class Demo extends Component {
   render() {
     return (
-      <div style={{
-        fontFamily: 'Arial, Helvetica, sans-serif',
-        color: '#54557d'
-      }}>
+      <div
+        style={{
+          fontFamily: "Arial, Helvetica, sans-serif",
+          color: "#54557d"
+        }}
+      >
         <h3>React Logo in 3D</h3>
 
-        <Logo />
+        {/* <Logo />
+        <Logo isSpinning/> */}
+        <Logo isRotating isSpinning/>
       </div>
     );
   }
