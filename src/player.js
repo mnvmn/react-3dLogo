@@ -3,9 +3,8 @@ import PropTypes from "prop-types";
 import * as THREE from "three";
 import * as dat from 'dat.gui';
 import * as orbitControls from "three-orbit-controls";
-import Scene from "./scene";
 
-export default class Player extends Scene {
+export default class Player extends Component {
   static propTypes = {
     height: PropTypes.number,
     width: PropTypes.number,

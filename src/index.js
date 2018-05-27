@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Player from "./player";
+import Scene from "./scene";
 
 const defaultColor = "#404040";
 
@@ -35,7 +35,6 @@ class Logo extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props.color);
     this.state = {
       ...props
     };
@@ -51,7 +50,7 @@ class Logo extends Component {
   }
 
   render() {
-    return <Player {...this.state} />;
+    return <Scene {...this.state} />;
   }
 }
 

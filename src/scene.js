@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import * as THREE from "three";
+import Player from "./player";
 
-export default class Scene extends Component {
+
+export default class Scene extends Player {
 
   init() {
     this.setUpScene();
