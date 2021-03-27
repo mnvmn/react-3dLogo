@@ -40,6 +40,7 @@
     "url": "git+https://github.com/mnvmn/react-3dLogo.git"
   },
   "keywords": [
-    "react-component",  "logo"
+    "react-component",
+    "logo"
   ]
 }
