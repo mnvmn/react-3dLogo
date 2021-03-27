@@ -1,5 +1,5 @@
 {
-  "name": "react-3d-logo",
+  "name": "@mnvmn/react-3d-logo",
   "version": "1.0.0",
   "description": "react-3d-logo React component",
   "main": "lib/index.js",
@@ -35,8 +35,11 @@
   "author": "",
   "homepage": "",
   "license": "MIT",
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mnvmn/react-3dLogo.git"
+  },
   "keywords": [
-    "react-component"
+    "react-component",  "logo"
   ]
 }
