@@ -19,18 +19,18 @@
     "test:watch": "nwb test-react --server"
   },
   "dependencies": {
-    "dat.gui": "^0.7.2",
-    "prop-types": "^15.6.1",
-    "three": "^0.92.0",
+    "dat.gui": "^0.7.7",
+    "prop-types": "^15.7.2",
+    "three": "^0.126.1",
     "three-orbit-controls": "^82.1.0"
   },
   "peerDependencies": {
     "react": "16.x"
   },
   "devDependencies": {
-    "nwb": "0.21.x",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "nwb": "^0.25.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
   },
   "author": "",
   "homepage": "",
